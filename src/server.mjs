@@ -205,8 +205,9 @@ function sendPlain(res, status, obj) {
 const server = http.createServer((req, res) => {
   const started = Date.now();
 
-  // Health/status probe (GET). Unsigned JSON; the signed handshake is the POST preflight.
-  if (req.method === "GET" && (req.url === "/" || req.url === "/agent" || req.url === "/health")) {
+  // Health/status probe (GET + HEAD). Unsigned JSON; the signed handshake is the POST preflight.
+  // HEAD must answer 200 too — validators/probes use it, and a 404 on HEAD reads as "endpoint down".
+  if ((req.method === "GET" || req.method === "HEAD") && (req.url === "/" || req.url === "/agent" || req.url === "/health")) {
     sendPlain(res, 200, {
       ok: true, agent: "rezimx-btc", track: "proof-gatekeeper",
       status: "online", protocolVersion: "v1", uptimeSec: Math.floor(process.uptime()),
