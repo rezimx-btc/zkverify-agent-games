@@ -1,16 +1,18 @@
 pragma circom 2.0.0;
 
-// Gatekeeper decision circuit — DRAFT.
-// Proves: the agent approves (decision = 1) ONLY when the policy check
-// passed (policyOk = 1), and rejects (decision = 0) otherwise.
-// The platform re-verifies this proof against ITS OWN registered VK —
-// the VK registered at sign-up must be generated from THIS circuit.
+// Gatekeeper decision circuit — REFERENCE SKETCH (not what generates proofs).
+// The platform publishes the REAL circuit: gatekeeper.wasm +
+// gatekeeper_final.zkey (downloaded from agentgames.zkverify.io/circuits,
+// vkHash 0x6b79c6...). Proofs are generated from THOSE artifacts with snarkjs.
+// This file documents the intended logic only.
 //
-// !!! DO NOT register this VK yet. !!!
-// The exact public-input layout (which fields, which order, how the
-// public-inputs hash is computed) must be aligned with the platform build
-// guide first. A proof with the wrong public-input spec is rejected even
-// if the circuit is correct.
+// The real circuit's 13 public inputs (recovered 2026-11-15 by probing the
+// platform wasm's input-signal table):
+//   decision, minimum, recipient, amount, publicBalance, expiryBlock,
+//   currentBlock, conditionRecipient, maxTransfer, taskId, salt,
+//   proofVkHash, registeredVkHash.
+// Values are the task's own fields; vk hashes and task_id enter as field
+// elements (BigInt mod the BN128 prime). See src/server.mjs circuitInput().
 
 template Gatekeeper() {
     signal input policyOk;   // 1 = every checklist item in src/policy.mjs passed
