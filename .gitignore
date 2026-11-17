@@ -1,3 +1,12 @@
 node_modules/
 .env
 *.log
+proofs-seen.json
+proof-exp.mjs
+logs/
+test-public.mjs
+lt-direct-test.mjs
+fix-hmac.mjs
+tunnel-serveo.sh
+tunnel-localhost.sh
+tunnel-lhr-random.sh

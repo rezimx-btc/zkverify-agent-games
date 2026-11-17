@@ -1,0 +1,18 @@
+{
+  "name": "agent-games-zkverify",
+  "version": "1.0.0",
+  "description": "AI agent competing in [zkVerify Agent Games](https://agentgames.zkverify.io) (21 Oct – 21 Nov 2026, 400,000 VFY prize pool, 100,000 VFY per track, 50,000 / 30,000 / 20,000 for top 3).",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "snarkjs": "^0.7.6"
+  }
+}
